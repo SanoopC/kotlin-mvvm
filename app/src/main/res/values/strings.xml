@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Mock ATM</string>
+    <string name="login_sign_up_hint">Don\'t have an account? Create</string>
+    <string name="submit">Submit</string>
+    <string name="landing_account_number_hint">Account Number</string>
+    <string name="landing_title">Exalture Bank</string>
+    <string name="forgot_pin">Forgot Pin?</string>
+    <string name="text_show">Show</string>
+    <string name="text_hide">Hide</string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/landingFragment">
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.exalture.atm.dashboard.DashboardFragment"
+        tools:layout="@layout/dashboard_fragment" />
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="com.exalture.atm.landing.LandingFragment"
+        android:label="landing_fragment"
+        tools:layout="@layout/landing_fragment">
+        <action
+            android:id="@+id/action_landingFragment_to_dashboard_fragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/passCodeFragment"
+        android:name="com.exalture.atm.pin.PinNumberFragment"
+        android:label="PassCodeFragment"
+        tools:layout="@layout/pin_number_fragment" />
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.exalture.atm.register.CreateAccountFragment"
+        android:label="CreateAccountFragment"
+        tools:layout="@layout/create_account_fragment" />
+</navigation>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dashboard_background"
+        android:padding="24dp"
+        tools:context=".dashboard.DashboardFragment">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="@id/guideline3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".7" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".2" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/header"
+                style="@style/landingHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/value_20"
+                android:text="services"
+                android:textAllCaps="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/depositButton"
+                style="@style/gradientButton"
+                android:layout_marginTop="@dimen/value_20"
+                android:drawableStart="@drawable/ic_deposit"
+                android:drawablePadding="@dimen/value_10"
+                android:text="Deposit"
+                android:textAllCaps="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/withdrawButton"
+                style="@style/gradientButton"
+                android:layout_marginTop="@dimen/value_10"
+                android:drawableStart="@drawable/ic_withdraw"
+                android:drawablePadding="@dimen/value_10"
+                android:text="Withdrawal"
+                android:textAllCaps="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/depositButton" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/balanceButton"
+                style="@style/gradientButton"
+                android:layout_marginTop="@dimen/value_10"
+                android:drawableStart="@drawable/ic_balance"
+                android:drawablePadding="@dimen/value_10"
+                android:text="Balance Inquiry"
+                android:textAllCaps="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/statementButton" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/statementButton"
+                style="@style/gradientButton"
+                android:layout_marginTop="@dimen/value_10"
+                android:drawableStart="@drawable/ic_statement"
+                android:drawablePadding="@dimen/value_10"
+                android:text="Mini Statement"
+                android:textAllCaps="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/withdrawButton" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/pinChangeButton"
+                style="@style/gradientButton"
+                android:layout_marginTop="@dimen/value_10"
+                android:drawableEnd="@drawable/ic_pin_change"
+                android:drawablePadding="@dimen/value_10"
+                android:text="Change Pin "
+                android:textAllCaps="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/balanceButton" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/transferButton"
+                style="@style/gradientButton"
+                android:layout_marginTop="@dimen/value_10"
+                android:drawableEnd="@drawable/ic_transfer"
+                android:drawablePadding="@dimen/value_10"
+                android:text="Transfer"
+                android:textAllCaps="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pinChangeButton" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/othersButton"
+                style="@style/gradientButton"
+                android:layout_marginTop="@dimen/value_10"
+                android:drawableEnd="@drawable/ic_others"
+                android:drawablePadding="@dimen/value_10"
+                android:text="Others"
+                android:textAllCaps="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/transferButton" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cancelButton"
+                style="@style/gradientButton"
+                android:layout_marginTop="@dimen/value_10"
+                android:drawableEnd="@drawable/ic_cancel"
+                android:drawablePadding="@dimen/value_10"
+                android:text="Exit"
+                android:textAllCaps="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/othersButton" />
+
+            <TextView
+                android:id="@+id/createAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/value_20"
+                android:text="@string/login_sign_up_hint"
+                android:textColor="@color/primaryTextColor"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/submitButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
