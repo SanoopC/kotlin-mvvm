@@ -3,21 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="android.text.InputType" />
-
-        <variable
-            name="pinViewModel"
-            type="com.exalture.atm.pin.PinNumberViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
+        android:background="@drawable/background_low_bottom"
         android:padding="24dp"
-        tools:context=".pin.PinNumberFragment">
+        tools:context=".phone.PhoneFragment">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0dp"
@@ -26,6 +17,17 @@
             app:layout_constraintBottom_toBottomOf="@id/guideline3"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/icon_others"
+            android:tint="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="@id/guideline3"
+            app:layout_constraintDimensionRatio="@string/page_icon_ratio"
+            app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,10 +43,20 @@
                 style="@style/landingHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_pin_number"
+                android:text="@string/title_exalture_bank"
                 android:textAllCaps="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/subHeader"
+                style="@style/subHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_update"
+                android:textAllCaps="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputAccount"
@@ -52,60 +64,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/value_20"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/header">
+                app:layout_constraintTop_toBottomOf="@id/subHeader">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextEmail"
                     style="@style/modifiedEditText"
-                    android:hint="@string/landing_account_number_hint"
-                    android:inputType="textEmailAddress"
+                    android:hint="@string/hint_phone_number"
+                    android:inputType="number"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.poovam.pinedittextfield.SquarePinField
-                android:id="@+id/editTextPin"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submitButton"
+                style="@style/gradientButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/value_10"
-                android:inputType='@{pinViewModel.isPinVisible() ? InputType.TYPE_CLASS_NUMBER : (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD) }'
-                android:textSelectHandle="@drawable/text_handle"
-                android:textSize="30sp"
-                app:cornerRadius="10dp"
-                app:distanceInBetween="15dp"
-                app:fieldColor="@android:color/black"
-                app:highlightColor="@color/colorPrimary"
-                app:highlightType="currentField"
+                android:layout_marginTop="@dimen/value_20"
+                android:text="@string/text_proceed"
+                android:textAllCaps="true"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputAccount" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cancelButton"
+                style="@style/gradientButton"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/value_20"
+                android:text="@string/text_cancel"
+                android:textAllCaps="true"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/header"
-                app:noOfFields="4" />
+                app:layout_constraintTop_toBottomOf="@id/textInputAccount" />
 
-            <TextView
-                android:id="@+id/forgotPin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/value_10"
-                android:layout_marginEnd="@dimen/value_20"
-                android:text="@string/forgot_pin"
-                android:textColor="@color/colorBlue"
-                android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@id/visibility"
-                app:layout_constraintTop_toBottomOf="@id/editTextPin" />
-
-            <TextView
-                android:id="@+id/visibility"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/value_10"
-                android:drawableStart="@drawable/icon_visibility"
-                android:drawablePadding="@dimen/value_5"
-                android:onClick="@{() ->  pinViewModel.handleVisibility()}"
-                android:text="@string/text_show"
-                android:textColor="@android:color/black"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="@id/editTextPin"
-                app:layout_constraintTop_toBottomOf="@id/editTextPin" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

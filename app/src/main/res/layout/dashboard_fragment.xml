@@ -3,14 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="dashboardModel"
+            type="com.exalture.atm.dashboard.DashboardViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/dashboard_background"
+        android:background="@drawable/background"
         android:padding="24dp"
         tools:context=".dashboard.DashboardFragment">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/logo"
@@ -47,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/value_20"
-                android:text="services"
+                android:text="@string/text_services"
                 android:textAllCaps="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +66,7 @@
                 android:layout_marginTop="@dimen/value_20"
                 android:drawableStart="@drawable/ic_deposit"
                 android:drawablePadding="@dimen/value_10"
-                android:text="Deposit"
+                android:text="@string/text_deposit"
                 android:textAllCaps="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/header" />
@@ -70,7 +77,7 @@
                 android:layout_marginTop="@dimen/value_10"
                 android:drawableStart="@drawable/ic_withdraw"
                 android:drawablePadding="@dimen/value_10"
-                android:text="Withdrawal"
+                android:text="@string/text_withdrawal"
                 android:textAllCaps="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/depositButton" />
@@ -81,7 +88,7 @@
                 android:layout_marginTop="@dimen/value_10"
                 android:drawableStart="@drawable/ic_balance"
                 android:drawablePadding="@dimen/value_10"
-                android:text="Balance Inquiry"
+                android:text="@string/text_balance_inquiry"
                 android:textAllCaps="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/statementButton" />
@@ -92,7 +99,7 @@
                 android:layout_marginTop="@dimen/value_10"
                 android:drawableStart="@drawable/ic_statement"
                 android:drawablePadding="@dimen/value_10"
-                android:text="Mini Statement"
+                android:text="@string/text_mini_statement"
                 android:textAllCaps="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/withdrawButton" />
@@ -103,7 +110,7 @@
                 android:layout_marginTop="@dimen/value_10"
                 android:drawableEnd="@drawable/ic_pin_change"
                 android:drawablePadding="@dimen/value_10"
-                android:text="Change Pin "
+                android:text="@string/text_change_pin"
                 android:textAllCaps="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/balanceButton" />
@@ -114,7 +121,7 @@
                 android:layout_marginTop="@dimen/value_10"
                 android:drawableEnd="@drawable/ic_transfer"
                 android:drawablePadding="@dimen/value_10"
-                android:text="Transfer"
+                android:text="@string/text_transfer"
                 android:textAllCaps="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pinChangeButton" />
@@ -125,7 +132,7 @@
                 android:layout_marginTop="@dimen/value_10"
                 android:drawableEnd="@drawable/ic_others"
                 android:drawablePadding="@dimen/value_10"
-                android:text="Others"
+                android:text="@string/text_others"
                 android:textAllCaps="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/transferButton" />
@@ -136,22 +143,10 @@
                 android:layout_marginTop="@dimen/value_10"
                 android:drawableEnd="@drawable/ic_cancel"
                 android:drawablePadding="@dimen/value_10"
-                android:text="Exit"
+                android:text="@string/text_exit"
                 android:textAllCaps="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/othersButton" />
-
-            <TextView
-                android:id="@+id/createAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/value_20"
-                android:text="@string/login_sign_up_hint"
-                android:textColor="@color/primaryTextColor"
-                android:textStyle="bold"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/submitButton" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

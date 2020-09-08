@@ -8,15 +8,26 @@
         android:layout_height="match_parent"
         android:background="@drawable/background_low_bottom"
         android:padding="24dp"
-        tools:context=".register.CreateAccountFragment">
+        tools:context=".transfer.TransferFragment">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="@id/guideline3"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/icon_transfer"
+            android:tint="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="@id/guideline3"
+            app:layout_constraintDimensionRatio="1:1.5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline2"
+
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,7 +43,6 @@
                 style="@style/landingHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/value_20"
                 android:text="@string/title_exalture_bank"
                 android:textAllCaps="true"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,13 +53,13 @@
                 style="@style/subHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_new_account"
+                android:text="@string/text_transfer"
                 android:textAllCaps="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/header" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputName"
+                android:id="@+id/textInputAccount"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,42 +67,27 @@
                 app:layout_constraintTop_toBottomOf="@id/subHeader">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextName"
+                    android:id="@+id/editTextAccount"
                     style="@style/modifiedEditText"
-                    android:hint="@string/hint_full_name"
-                    android:inputType="textEmailAddress"
+                    android:hint="@string/hint_to_account_number"
+                    android:inputType="number"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputAddress"
+                android:id="@+id/textInputRemark"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/value_10"
-                app:layout_constraintTop_toBottomOf="@id/textInputName">
+                app:layout_constraintTop_toBottomOf="@id/textInputAccount">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextAddress"
+                    android:id="@+id/editTextRemark"
                     style="@style/modifiedEditText"
-                    android:hint="@string/hint_address"
-                    android:inputType="textPostalAddress"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputPhone"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/value_10"
-                app:layout_constraintTop_toBottomOf="@id/textInputAddress">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPhone"
-                    style="@style/modifiedEditText"
-                    android:hint="@string/hint_phone_number"
-                    android:inputType="phone"
+                    android:hint="@string/hint_remarks"
+                    android:inputType="text"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,59 +97,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/value_10"
-                app:layout_constraintTop_toBottomOf="@id/textInputPhone">
+                app:layout_constraintTop_toBottomOf="@id/textInputRemark">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextAmount"
                     style="@style/modifiedEditText"
-                    android:hint="@string/hint_account_opening_amount"
+                    android:hint="@string/hint_amount"
                     android:inputType="number"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/accountTypeLabel"
-                style="@style/modifiedEditText"
+                android:id="@+id/balanceLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_account_type"
-                app:layout_constraintBottom_toBottomOf="@id/radio_group"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/radio_group" />
+                android:text="@string/label_available_balance_rs"
+                app:layout_constraintEnd_toStartOf="@id/balance"
+                app:layout_constraintTop_toBottomOf="@id/textInputAmount" />
 
-            <RadioGroup
-                android:id="@+id/radio_group"
+            <TextView
+                android:id="@+id/balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toEndOf="@id/accountTypeLabel"
-                app:layout_constraintTop_toBottomOf="@id/textInputAmount">
-
-                <RadioButton
-                    android:id="@+id/savings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/colorPrimary"
-                    android:checked="true"
-                    android:text="@string/text_savings" />
-
-                <RadioButton
-                    android:id="@+id/current"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/colorPrimary"
-                    android:text="@string/text_current" />
-            </RadioGroup>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputAmount" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/submitButton"
                 style="@style/gradientButton"
-                android:layout_width="0dp"
-                android:text="@string/text_create"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/value_20"
+                android:text="@string/text_proceed"
                 android:textAllCaps="true"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/radio_group" />
+                app:layout_constraintTop_toBottomOf="@id/balance" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cancelButton"
+                style="@style/gradientButton"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/value_20"
+                android:text="@string/text_back_to_main"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/balance" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -164,7 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent=".7" />
+            app:layout_constraintGuide_percent=".3" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

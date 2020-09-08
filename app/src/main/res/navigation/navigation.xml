@@ -7,7 +7,26 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.exalture.atm.dashboard.DashboardFragment"
-        tools:layout="@layout/dashboard_fragment" />
+        tools:layout="@layout/dashboard_fragment">
+        <action
+            android:id="@+id/action_dashboardFragment_to_amountFragment"
+            app:destination="@id/amountFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_balanceFragment"
+            app:destination="@id/balanceFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_miniStatementFragment"
+            app:destination="@id/miniStatementFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_changePinFragment"
+            app:destination="@id/changePinFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_phoneFragment"
+            app:destination="@id/phoneFragment" />
+    </fragment>
     <fragment
         android:id="@+id/landingFragment"
         android:name="com.exalture.atm.landing.LandingFragment"
@@ -16,6 +35,9 @@
         <action
             android:id="@+id/action_landingFragment_to_dashboard_fragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_landingFragment_to_createAccountFragment"
+            app:destination="@id/createAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/passCodeFragment"
@@ -27,4 +49,34 @@
         android:name="com.exalture.atm.register.CreateAccountFragment"
         android:label="CreateAccountFragment"
         tools:layout="@layout/create_account_fragment" />
+    <fragment
+        android:id="@+id/amountFragment"
+        android:name="com.exalture.atm.amount.AmountFragment"
+        android:label="amount_fragment"
+        tools:layout="@layout/amount_fragment" />
+    <fragment
+        android:id="@+id/transferFragment"
+        android:name="com.exalture.atm.transfer.TransferFragment"
+        android:label="TransferFragment"
+        tools:layout="@layout/transfer_fragment" />
+    <fragment
+        android:id="@+id/balanceFragment"
+        android:name="com.exalture.atm.balance.BalanceFragment"
+        android:label="BalanceFragment"
+        tools:layout="@layout/balance_fragment" />
+    <fragment
+        android:id="@+id/miniStatementFragment"
+        android:name="com.exalture.atm.statement.MiniStatementFragment"
+        android:label="MiniStatementFragment"
+        tools:layout="@layout/mini_statement_fragment" />
+    <fragment
+        android:id="@+id/changePinFragment"
+        android:name="com.exalture.atm.changepin.ChangePinFragment"
+        android:label="ChangePinFragment"
+        tools:layout="@layout/change_pin_fragment" />
+    <fragment
+        android:id="@+id/phoneFragment"
+        android:name="com.exalture.atm.phone.PhoneFragment"
+        android:label="PhoneFragment"
+        tools:layout="@layout/phone_fragment" />
 </navigation>

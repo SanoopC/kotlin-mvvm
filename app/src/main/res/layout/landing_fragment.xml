@@ -6,11 +6,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/dashboard_background"
+        android:background="@drawable/background_low_bottom"
         android:padding="24dp"
         tools:context=".landing.LandingFragment">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/logo"
@@ -20,6 +20,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/containerAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/value_20"
-                android:text="@string/landing_title"
+                android:text="@string/title_exalture_bank"
                 android:textAllCaps="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -72,12 +73,74 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/value_10"
                 android:text="@string/login_sign_up_hint"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="@color/colorBlue"
                 android:textStyle="bold"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/submitButton" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/containerAccount">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/website"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:src="@drawable/icon_website"
+                app:layout_constraintDimensionRatio="1:0.6"
+                app:layout_constraintEnd_toStartOf="@id/facebook"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/facebook"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:src="@drawable/icon_facebook"
+                app:layout_constraintDimensionRatio="1:0.6"
+                app:layout_constraintEnd_toStartOf="@id/email"
+                app:layout_constraintStart_toEndOf="@id/website"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:src="@drawable/icon_email"
+                app:layout_constraintDimensionRatio="1:0.6"
+                app:layout_constraintEnd_toStartOf="@id/gmap"
+                app:layout_constraintStart_toEndOf="@id/facebook"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/gmap"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:src="@drawable/icon_gmap"
+                app:layout_constraintDimensionRatio="1:0.6"
+                app:layout_constraintEnd_toStartOf="@id/callUs"
+                app:layout_constraintStart_toEndOf="@id/email"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/callUs"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:src="@drawable/icon_call"
+                app:layout_constraintDimensionRatio="1:0.6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/gmap"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.Guideline
