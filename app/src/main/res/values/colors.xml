@@ -8,6 +8,8 @@
     <color name="colorBlack">#000000</color>
     <color name="colorBlue">#2661FA</color>
     <color name="colorTransparentBlack">#80000000</color>
+    <color name="colorTransparentBlackLight">#10000000</color>
+    <color name="colorTransparentBlueLight">#80A0B9FC</color>
     <color name="colorOrange">#FC8822</color>
     <color name="colorOrangeLight">#FFB129</color>
 </resources>

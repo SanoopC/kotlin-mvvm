@@ -6,43 +6,60 @@ import androidx.lifecycle.ViewModel
 import com.exalture.atm.Config
 
 class MiniStatementViewModel : ViewModel() {
+    private val _navigateToTransactionDetails = MutableLiveData<MiniStatementFragment.Transaction>()
+    val navigateToTransactionDetails
+        get() = _navigateToTransactionDetails
+
+    fun onTransactionItemClicked(transactionId: MiniStatementFragment.Transaction) {
+        _navigateToTransactionDetails.value = transactionId
+    }
+
+    fun onTransactionDetailsNavigated() {
+        _navigateToTransactionDetails.value = null
+    }
+
     private val _transaction = MutableLiveData<List<MiniStatementFragment.Transaction>>(
         // TODO: Remove dummy values
         listOf(
             MiniStatementFragment.Transaction(
-                100023,
-                "27 Aug 2020",
+                123400001001,
+                1599563383000,
                 "Deposit",
                 "5,000.00",
-                Config.TYPE_DEPOSIT
+                Config.TYPE_DEPOSIT,
+                0
             ),
             MiniStatementFragment.Transaction(
-                100024,
-                "07 Sep 2020",
+                123400001002,
+                1599476983000,
                 "Withdraw from ATM",
                 "1,000.00",
-                Config.TYPE_WITHDRAW
+                Config.TYPE_WITHDRAW,
+                0
             ),
             MiniStatementFragment.Transaction(
-                100025,
-                "10 Aug 2020",
+                123400001003,
+                1599304183000,
                 "Withdraw from ATM",
                 "500.00",
-                Config.TYPE_WITHDRAW
+                Config.TYPE_WITHDRAW,
+                0
             ),
             MiniStatementFragment.Transaction(
-                100026,
-                "09 Aug 2020",
+                123400001004,
+                1598353783000,
                 "EMI",
                 "1,000.00",
-                Config.TYPE_TRANSFER
+                Config.TYPE_TRANSFER,
+                9841213132
             ),
             MiniStatementFragment.Transaction(
-                100027,
-                "09 Aug 2020",
+                123400001005,
+                1596625783000,
                 "Withdraw from ATM",
                 "200.00",
-                Config.TYPE_WITHDRAW
+                Config.TYPE_WITHDRAW,
+                0
             )
         )
     )

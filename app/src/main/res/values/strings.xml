@@ -42,4 +42,14 @@
     <string name="label_available_balance_rs">Available Balance: Rs.</string>
     <string name="hint_remarks">Remarks</string>
     <string name="hint_to_account_number">To Account Number</string>
+    <string name="text_dr">Dr</string>
+    <string name="text_cr">Cr</string>
+    <string name="label_transaction_id">Transaction ID</string>
+    <string name="title_transaction_details">Transaction Details</string>
+    <string name="label_transaction_amount">Transaction Amount</string>
+    <string name="label_transaction_date">Transaction Date</string>
+    <string name="label_transaction_time">Transaction Time</string>
+    <string name="label_transaction_remarks">Transaction Remarks</string>
+    <string name="text_close">Close</string>
+    <string name="label_to_account_number">To Account Number</string>
 </resources>

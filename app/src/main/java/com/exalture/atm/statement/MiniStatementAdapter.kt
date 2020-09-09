@@ -1,19 +1,13 @@
 package com.exalture.atm.statement
 
-import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.exalture.atm.Config
-import com.exalture.atm.R
+import com.exalture.atm.databinding.TransactionItemBinding
 
-//class MiniStatementAdapter(private val list: List<MiniStatementFragment.Transaction>) :
-class MiniStatementAdapter() :
+class MiniStatementAdapter(private val clickListener: MiniStatementListener) :
     ListAdapter<MiniStatementFragment.Transaction, MiniStatementAdapter.TransactionViewHolder>(
         MiniStatementDiffCallback()
     ) {
@@ -23,51 +17,26 @@ class MiniStatementAdapter() :
     }
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
-        val transaction: MiniStatementFragment.Transaction = getItem(position)
-        holder.bind(transaction)
+        holder.bind(getItem(position), clickListener)
     }
 
-    class TransactionViewHolder private constructor(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
-        private var mIconView: ImageView? = null
-        private var mTypeView: TextView? = null
-        private var mDateView: TextView? = null
-        private var mRemarksView: TextView? = null
-        private var mAmountView: TextView? = null
+    class TransactionViewHolder private constructor(val binding: TransactionItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-
-        init {
-            mDateView = itemView.findViewById(R.id.transaction_date)
-            mRemarksView = itemView.findViewById(R.id.transaction_remarks)
-            mAmountView = itemView.findViewById(R.id.transaction_amount)
-            mTypeView = itemView.findViewById(R.id.transaction_type)
-            mIconView = itemView.findViewById(R.id.transaction_icon)
-        }
-
-        fun bind(transaction: MiniStatementFragment.Transaction) {
-            mDateView?.text = transaction.transactionDate
-            mRemarksView?.text = transaction.transactionRemarks
-            mAmountView?.text = transaction.transactionAmount.toString()
-            if (transaction.transactionType == Config.TYPE_DEPOSIT) {
-                mTypeView?.text = "Dr"
-                mTypeView?.setTextColor(Color.GREEN)
-                mIconView?.setImageResource(R.drawable.ic_deposit)
-            } else if (transaction.transactionType == Config.TYPE_WITHDRAW) {
-                mTypeView?.text = "Cr"
-                mTypeView?.setTextColor(Color.RED)
-                mIconView?.setImageResource(R.drawable.ic_withdraw)
-            } else {
-                mTypeView?.text = "Cr"
-                mTypeView?.setTextColor(Color.RED)
-                mIconView?.setImageResource(R.drawable.ic_transfer)
-            }
+        fun bind(
+            transaction: MiniStatementFragment.Transaction,
+            clickListener: MiniStatementListener
+        ) {
+            binding.transactionItem = transaction
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
         }
 
         companion object {
             fun from(parent: ViewGroup): TransactionViewHolder {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.transaction_item, parent, false)
-                return TransactionViewHolder(view)
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = TransactionItemBinding.inflate(layoutInflater, parent, false)
+                return TransactionViewHolder(binding)
             }
         }
     }
@@ -88,4 +57,9 @@ class MiniStatementDiffCallback : DiffUtil.ItemCallback<MiniStatementFragment.Tr
         return oldItem == newItem
     }
 
+}
+
+class MiniStatementListener(val clickListener: (transaction: MiniStatementFragment.Transaction) -> Unit) {
+    fun onClick(transaction: MiniStatementFragment.Transaction) =
+        clickListener(transaction)
 }
