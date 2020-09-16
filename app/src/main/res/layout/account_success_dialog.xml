@@ -5,12 +5,12 @@
     <data>
 
         <variable
-            name="transactionItem"
-            type="com.exalture.atm.statement.MiniStatementFragment.Transaction" />
+            name="dialogViewModel"
+            type="com.exalture.atm.register.AccountSuccessDialogViewModel" />
 
         <variable
-            name="dialogViewModel"
-            type="com.exalture.atm.statement.TransactionDialogViewModel" />
+            name="accountData"
+            type="com.exalture.atm.database.AccountData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,7 +61,7 @@
                         style="@style/subHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Successful"
+                        android:text="@string/text_account_created_successfully"
                         android:textAlignment="center"
                         android:textAllCaps="true"
                         android:textSize="@dimen/text_size_30"
@@ -70,112 +70,80 @@
                         app:layout_constraintTop_toTopOf="@id/guidelineTick" />
 
                     <TextView
-                        android:id="@+id/idLabel"
+                        android:id="@+id/accountNumberLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/value_20"
-                        android:text="@string/label_transaction_id"
+                        android:text="@string/text_account_number"
+                        android:textSize="@dimen/text_size_18"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/subHeader" />
 
                     <TextView
-                        android:id="@+id/transactionId"
+                        android:id="@+id/accountNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_size_20"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/idLabel"
-                        app:transactionId="@{transactionItem}" />
-
-                    <TextView
-                        android:id="@+id/amountLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/value_15"
-                        android:text="@string/label_transaction_amount"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/transactionId" />
-
-                    <TextView
-                        android:id="@+id/amountSymbol"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/rupee_symbol"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/text_size_25"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@id/amount"
+                        app:accountNumber="@{accountData}"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/amountLabel" />
+                        app:layout_constraintTop_toBottomOf="@id/accountNumberLabel" />
+
 
                     <TextView
-                        android:id="@+id/amount"
+                        android:id="@+id/pinLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/value_5"
+                        android:layout_marginTop="@dimen/value_15"
+                        android:text="@string/text_temporary_pin"
+                        android:textSize="@dimen/text_size_18"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/accountNumber" />
+
+                    <TextView
+                        android:id="@+id/temporaryPin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/text_size_25"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintStart_toEndOf="@id/amountSymbol"
-                        app:layout_constraintTop_toTopOf="@id/amountSymbol"
-                        app:transactionAmount="@{transactionItem}" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/pinLabel"
+                        app:temporaryPin="@{accountData}" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/accountView"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/note"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/value_10"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/value_15"
-                        app:accountViewVisibility="@{transactionItem}"
+                        android:text="@string/message_temporary_pin"
+                        android:textAlignment="center"
+                        android:textStyle="italic"
+                        android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/amount">
-
-                        <TextView
-                            android:id="@+id/accountLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/label_to_account_number"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/transactionAccount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_size_20"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_chainStyle="packed"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/accountLabel"
-                            app:transactionToAccount="@{transactionItem}" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
+                        app:layout_constraintTop_toBottomOf="@id/authenticateButton" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/okButton"
+                        android:id="@+id/authenticateButton"
                         style="@style/gradientButton"
-                        android:layout_marginTop="@dimen/value_20"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/value_20"
                         android:background="@drawable/dialog_button_background"
-                        android:onClick="@{() -> dialogViewModel.closeDialog()}"
-                        android:text="ok"
+                        android:onClick="@{() -> dialogViewModel.openAuthentication()}"
+                        android:text="@string/text_authenticate"
                         android:textAllCaps="true"
                         android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/accountView" />
+                        app:layout_constraintTop_toBottomOf="@id/temporaryPin" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -184,6 +152,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/value_10"
                 app:layout_constraintBottom_toTopOf="@id/cardView"
+                android:background="@drawable/round_corner_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/cardView">

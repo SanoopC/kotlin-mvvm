@@ -1,4 +1,4 @@
-package com.exalture.atm
+package com.exalture.atm.landing
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

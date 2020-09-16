@@ -37,10 +37,6 @@
 
     <style name="loginCard" parent="parent"></style>
 
-    <style name="linearParent" parent="parent">
-        <item name="android:orientation">vertical</item>
-    </style>
-
 
     <style name="modifiedEditText" parent="parent">
         <item name="android:textSize">@dimen/newsMoreTextSize</item>
@@ -74,8 +70,8 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="learnhubTitleText" parent="parent">
-        <item name="android:textSize">@dimen/contentTextSize</item>
+    <style name="labelTitleText" parent="parent">
+        <item name="android:textSize">@dimen/text_size_20</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textStyle">bold</item>
     </style>

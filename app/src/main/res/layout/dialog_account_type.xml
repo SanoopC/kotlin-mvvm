@@ -6,7 +6,7 @@
 
         <variable
             name="accountTypeViewModel"
-            type="com.exalture.atm.AccountTypeViewModel" />
+            type="com.exalture.atm.landing.AccountTypeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
