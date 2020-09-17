@@ -10,7 +10,7 @@
 
         <variable
             name="dialogViewModel"
-            type="com.exalture.atm.statement.TransactionDialogViewModel" />
+            type="com.exalture.atm.transfer.TransferSuccessDialogViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,36 +42,32 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/value_30"
                     android:padding="@dimen/value_20"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.appcompat.widget.AppCompatImageView
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guidelineTick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_transfer"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="@id/transactionRemarks"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/idLabel"
-                        app:tint="@color/colorTransparentBlackLight" />
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.2" />
+
 
                     <TextView
                         android:id="@+id/subHeader"
                         style="@style/subHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/value_10"
-                        android:text="@string/title_transaction_details"
+                        android:text="Successful"
                         android:textAlignment="center"
                         android:textAllCaps="true"
                         android:textSize="@dimen/text_size_30"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@id/guidelineTick" />
 
                     <TextView
                         android:id="@+id/idLabel"
@@ -84,7 +80,7 @@
                         app:layout_constraintTop_toBottomOf="@id/subHeader" />
 
                     <TextView
-                        android:id="@+id/transactionId"
+                        android:id="@+id/accountNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_size_20"
@@ -103,7 +99,7 @@
                         android:text="@string/label_transaction_amount"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/transactionId" />
+                        app:layout_constraintTop_toBottomOf="@id/accountNumber" />
 
                     <TextView
                         android:id="@+id/amountSymbol"
@@ -165,92 +161,38 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:id="@+id/dateLabel"
-                        android:layout_width="wrap_content"
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/okButton"
+                        style="@style/gradientButton"
+                        android:layout_marginTop="@dimen/value_20"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/value_15"
-                        android:text="@string/label_transaction_date"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/dialog_button_background"
+                        android:onClick="@{() -> dialogViewModel.closeDialog()}"
+                        android:text="ok"
+                        android:textAllCaps="true"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/accountView" />
-
-                    <TextView
-                        android:id="@+id/transactionDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_size_20"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/dateLabel"
-                        app:transactionDateFormatted="@{transactionItem}" />
-
-                    <TextView
-                        android:id="@+id/timeLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/value_15"
-                        android:text="@string/label_transaction_time"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/transactionDate" />
-
-                    <TextView
-                        android:id="@+id/transactionTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_size_20"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/timeLabel"
-                        app:transactionTimeFormatted="@{transactionItem}" />
-
-                    <TextView
-                        android:id="@+id/remarksLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/value_15"
-                        android:text="@string/label_transaction_remarks"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/transactionTime" />
-
-                    <TextView
-                        android:id="@+id/transactionRemarks"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_size_20"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/remarksLabel"
-                        app:transactionRemarks="@{transactionItem}" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/round_corner_background"
                 android:padding="@dimen/value_10"
-                app:layout_constraintBottom_toBottomOf="@id/cardView"
+                app:layout_constraintBottom_toTopOf="@id/cardView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardView">
+                app:layout_constraintTop_toTopOf="@id/cardView">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/cancelButton"
-                    style="@style/gradientButton"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/success"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> dialogViewModel.closeDialog()}"
-                    android:text="@string/text_close"
+                    android:src="@drawable/icon_success"
                     android:textAllCaps="true"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"

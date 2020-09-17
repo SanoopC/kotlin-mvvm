@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.exalture.atm.AccountTypeViewModel
 import com.exalture.atm.R
 import com.exalture.atm.databinding.DialogAccountTypeBinding
 import com.exalture.atm.databinding.LandingFragmentBinding
@@ -49,9 +48,7 @@ class LandingFragment : Fragment() {
             dialogAccountTypeBinding.accountTypeViewModel = dialogViewModel
 
             dialogViewModel.isSavingsAccount.observe(viewLifecycleOwner, Observer {
-                if (it == true) {
-                    // TODO: Need to handle
-                }
+                //TODO: Need to add logic
                 if (it != null) {
                     findNavController().navigate(LandingFragmentDirections.actionLandingFragmentToDashboardFragment())
                     dialogViewModel.doneNavigation()
@@ -61,11 +58,12 @@ class LandingFragment : Fragment() {
             dialogAccountType.setCancelable(true)
             dialogAccountType.show()
         }
-        binding.createAccount.setOnClickListener {
+        binding.createAccountText.setOnClickListener {
             findNavController().navigate(LandingFragmentDirections.actionLandingFragmentToCreateAccountFragment())
         }
         binding.gmap.setOnClickListener {
-            val gmmIntentUri = Uri.parse("geo:10.0129509,76.3466792?q=" + Uri.encode("Exalture Software Labs Private Limited"))
+            val gmmIntentUri =
+                Uri.parse("geo:10.0129509,76.3466792?q=" + Uri.encode("Exalture Software Labs Private Limited"))
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             startActivity(mapIntent)
         }

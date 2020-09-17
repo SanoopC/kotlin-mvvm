@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="createAccountViewModel"
+            type="com.exalture.atm.register.CreateAccountViewModel" />
+
+        <import type="com.exalture.atm.register.CreateAccountViewModel.FormErrors" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -59,9 +68,12 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextName"
                     style="@style/modifiedEditText"
-                    android:hint="@string/hint_full_name"
+                    android:hint="@string/text_account_holder_s_name"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:text="@={createAccountViewModel.fullName}"
+                    app:formErrors="@{createAccountViewModel.formErrors}"
+                    app:nameValidator="@{createAccountViewModel.fullName}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -75,9 +87,12 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextAddress"
                     style="@style/modifiedEditText"
-                    android:hint="@string/hint_address"
+                    android:hint="@string/text_communication_address"
                     android:inputType="textPostalAddress"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:text="@={createAccountViewModel.address}"
+                    app:addressValidator="@{createAccountViewModel.address}"
+                    app:formErrors="@{createAccountViewModel.formErrors}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -93,7 +108,10 @@
                     style="@style/modifiedEditText"
                     android:hint="@string/hint_phone_number"
                     android:inputType="phone"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:text="@={createAccountViewModel.phoneNumber}"
+                    app:formErrors="@{createAccountViewModel.formErrors}"
+                    app:phoneValidator="@{createAccountViewModel.phoneNumber}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -107,9 +125,12 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextAmount"
                     style="@style/modifiedEditText"
-                    android:hint="@string/hint_account_opening_amount"
                     android:inputType="number"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:text="@={createAccountViewModel.amount}"
+                    app:amountValidator="@{createAccountViewModel.amount}"
+                    app:formErrors="@{createAccountViewModel.formErrors}"
+                    app:isSavings="@{createAccountViewModel.isSavingAccount()}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -135,7 +156,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/colorPrimary"
-                    android:checked="true"
+                    android:checked="@{createAccountViewModel.isSavingAccount().equals(true)}"
+                    android:onClick="@{()-> createAccountViewModel.onAccountType(true)}"
                     android:text="@string/text_savings" />
 
                 <RadioButton
@@ -143,17 +165,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/colorPrimary"
+                    android:checked="@{createAccountViewModel.isSavingAccount().equals(false)}"
+                    android:onClick="@{()-> createAccountViewModel.onAccountType(false)}"
                     android:text="@string/text_current" />
             </RadioGroup>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/submitButton"
+                android:id="@+id/createAccount"
                 style="@style/gradientButton"
                 android:layout_width="0dp"
+                android:onClick="@{()-> createAccountViewModel.onCreateAccountClick()}"
                 android:text="@string/text_create"
                 android:textAllCaps="true"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radio_group" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/back"
+                style="@style/gradientButton"
+                android:layout_width="0dp"
+                android:onClick="@{()-> createAccountViewModel.backNavigation()}"
+                android:text="@string/text_cancel"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/radio_group" />
 
 

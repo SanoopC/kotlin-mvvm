@@ -69,7 +69,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextAccount"
                     style="@style/modifiedEditText"
-                    android:hint="@string/hint_to_account_number"
+                    android:hint="@string/text_to_account_number"
                     android:inputType="number"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>

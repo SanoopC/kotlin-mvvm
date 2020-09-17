@@ -9,13 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.exalture.atm.R
 import com.exalture.atm.databinding.TransactionDetailsDialogBinding
-import kotlinx.android.synthetic.main.dialog_account_type.view.*
+import com.exalture.atm.databinding.TransferSuccessDialogBinding
 
-class TransferDialog : DialogFragment() {
+class TransferSuccessDialog : DialogFragment() {
 
     companion object {
-        const val TAG = "TransferDialog"
-        fun newInstance() = TransferDialog()
+        const val TAG = "TransferSuccessDialog"
+        fun newInstance() = TransferSuccessDialog()
     }
 
     override fun onCreateView(
@@ -23,13 +23,9 @@ class TransferDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: TransactionDetailsDialogBinding =
-            DataBindingUtil.inflate(inflater, R.layout.transfer_dialog, container, false)
+        val binding: TransferSuccessDialogBinding =
+            DataBindingUtil.inflate(inflater, R.layout.transfer_success_dialog, container, false)
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onStart() {

@@ -30,7 +30,7 @@ class MiniStatementFragment : Fragment() {
     }
 
     private lateinit var viewModel: MiniStatementViewModel
-    private lateinit var dialogTransacrionDetails: Dialog
+    private lateinit var dialogTransactionDetails: Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +53,7 @@ class MiniStatementFragment : Fragment() {
             Observer { transactionItem ->
                 transactionItem?.let {
 
-                    dialogTransacrionDetails = Dialog(requireActivity(), R.style.df_dialog)
+                    dialogTransactionDetails = Dialog(requireActivity(), R.style.df_dialog)
                     val dialogTransactionDetailsBinding: TransactionDetailsDialogBinding =
                         DataBindingUtil.inflate(
                             LayoutInflater.from(context),
@@ -64,7 +64,7 @@ class MiniStatementFragment : Fragment() {
                     val dialogViewModel =
                         ViewModelProvider(this).get(TransactionDialogViewModel::class.java)
 
-                    dialogTransacrionDetails.setContentView(dialogTransactionDetailsBinding.root)
+                    dialogTransactionDetails.setContentView(dialogTransactionDetailsBinding.root)
                     dialogTransactionDetailsBinding.dialogViewModel = dialogViewModel
                     dialogTransactionDetailsBinding.transactionItem = transactionItem
                     dialogTransactionDetailsBinding.executePendingBindings()
@@ -72,12 +72,12 @@ class MiniStatementFragment : Fragment() {
                     dialogViewModel.closeButtonClicked.observe(viewLifecycleOwner, Observer {
                         if (it != null) {
                             dialogViewModel.doneNavigation()
-                            dialogTransacrionDetails.dismiss()
+                            dialogTransactionDetails.dismiss()
                         }
                     })
-                    dialogTransacrionDetails.setCancelable(true)
+                    dialogTransactionDetails.setCancelable(true)
 
-                    dialogTransacrionDetails.show()
+                    dialogTransactionDetails.show()
 
                     viewModel.onTransactionDetailsNavigated()
                 }

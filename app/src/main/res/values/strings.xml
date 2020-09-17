@@ -2,7 +2,7 @@
     <string name="app_name">EBI</string>
     <string name="login_sign_up_hint">Don\'t have an account? Create</string>
     <string name="submit">Submit</string>
-    <string name="landing_account_number_hint">Account Number</string>
+    <string name="text_account_number">Account Number</string>
     <string name="title_exalture_bank">Exalture Bank</string>
     <string name="forgot_pin">Forgot Pin?</string>
     <string name="text_show">Show</string>
@@ -27,8 +27,8 @@
     <string name="hint_confirm_your_pin">Confirm your pin</string>
     <string name="page_icon_ratio">1:1.5</string>
     <string name="text_new_account">New Account</string>
-    <string name="hint_full_name">Full Name</string>
-    <string name="hint_address">Address</string>
+    <string name="text_account_holder_s_name">Account Holder\'s Name</string>
+    <string name="text_communication_address">Communication Address</string>
     <string name="hint_phone_number">Phone Number</string>
     <string name="hint_account_opening_amount">Account Opening Amount</string>
     <string name="label_account_type">Account Type:</string>
@@ -41,7 +41,7 @@
     <string name="title_pin_number">Pin Number</string>
     <string name="label_available_balance_rs">Available Balance: Rs.</string>
     <string name="hint_remarks">Remarks</string>
-    <string name="hint_to_account_number">To Account Number</string>
+    <string name="text_to_account_number">To Account Number</string>
     <string name="text_dr">Dr</string>
     <string name="text_cr">Cr</string>
     <string name="label_transaction_id">Transaction ID</string>
@@ -51,5 +51,17 @@
     <string name="label_transaction_time">Transaction Time</string>
     <string name="label_transaction_remarks">Transaction Remarks</string>
     <string name="text_close">Close</string>
-    <string name="label_to_account_number">To Account Number</string>
+    <string name="error_name_validation">Name must be minimum 3 length</string>
+    <string name="hint_account_opening_amount_optional">Account Opening Amount (Optional)</string>
+    <string name="error_address_validation">Address must be minimum 5 length</string>
+    <string name="error_phone_validation">Phone must be minimum 10 length</string>
+    <string name="error_opening_amount_validation">Opening Amount must be minimum 1000</string>
+    <string name="error_required_validation">Required</string>
+    <string name="error_number_registered">Phone Number already registered</string>
+    <string name="title_account_details">Account \nDetails</string>
+    <string name="text_temporary_pin">Temporary Pin *</string>
+    <string name="text_view_details">View Details</string>
+    <string name="text_authenticate">Authenticate</string>
+    <string name="message_temporary_pin">* Please note down the PIN and change as soon as possible after authenticating</string>
+    <string name="text_account_created_successfully">Account Created Successfully</string>
 </resources>

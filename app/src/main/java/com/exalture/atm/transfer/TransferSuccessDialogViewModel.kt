@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class TransferDialogViewModel : ViewModel() {
+class TransferSuccessDialogViewModel : ViewModel() {
     private var _okButtonClicked = MutableLiveData<Boolean?>()
     val okButtonClicked: LiveData<Boolean?>
         get() = _okButtonClicked
