@@ -23,8 +23,8 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private var newAccountNumber = MutableLiveData<Long>()
-    private var randomPin = MutableLiveData<String>()
+    private var newAccountNumber = 0L
+    private var randomPin = ""
 
     var fullName = MutableLiveData<String>()
     var address = MutableLiveData<String>()
@@ -35,6 +35,10 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
 
     val isSavingAccount: LiveData<Boolean>
         get() = _isSavings
+
+    fun onAccountType(isSavings: Boolean) {
+        _isSavings.postValue(isSavings)
+    }
 
     private var _isRegistered = MutableLiveData<Boolean>()
 
@@ -59,10 +63,6 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
         _navigateToaLanding.value = true
     }
 
-    fun onAccountType(isSavings: Boolean) {
-        _isSavings.postValue(isSavings)
-    }
-
     init {
         initializeAccount()
         generateRandomPin()
@@ -70,14 +70,13 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
 
     private fun initializeAccount() {
         uiScope.launch {
-            newAccountNumber.value =
-                getRecentAccountNumber()?.plus(1) ?: Config.INITIAL_ACCOUNT_NUMBER
+            newAccountNumber = getRecentAccountNumber()?.plus(1) ?: Config.INITIAL_ACCOUNT_NUMBER
         }
     }
 
     @SuppressLint("DefaultLocale")
     private fun generateRandomPin() {
-        randomPin.value = String.format("%04d", Random().nextInt(10000))
+        randomPin = String.format("%04d", Random().nextInt(10000))
     }
 
     private suspend fun getRecentAccountNumber(): Long? {
@@ -104,7 +103,7 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
             formErrors.add(FormErrors.PHONE_INVALID)
         } else if (!isSavingAccount.value!! && amount.value.isNullOrEmpty()) {
             formErrors.add(FormErrors.AMOUNT_MISSING)
-        } else if (!isSavingAccount.value!! && Integer.valueOf(amount.value.toString()) < Config.MINIMUM_CURRENT_ACCOUNT_BALANCE) {
+        } else if (!isSavingAccount.value!! && amount.value!!.toInt() < Config.MINIMUM_CURRENT_ACCOUNT_BALANCE) {
             formErrors.add(FormErrors.AMOUNT_INVALID)
         }
         return formErrors.isEmpty()
@@ -135,7 +134,7 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
     fun createAccount() {
         uiScope.launch {
             val newAccount = AccountData(
-                newAccountNumber.value, randomPin.value, amount.value?.toDouble(),
+                newAccountNumber, randomPin, amount.value?.toDouble(),
                 phoneNumber.value.toString(), fullName.value.toString(), address.value.toString()
             )
             insert(newAccount)
