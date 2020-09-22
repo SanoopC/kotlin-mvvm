@@ -56,6 +56,9 @@ dependencies {
     kapt "androidx.room:room-compiler:$version_room"
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
 
+    // Debug Database Library
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
+    // LeakCanary to detect leaks
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 }

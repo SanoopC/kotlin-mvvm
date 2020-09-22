@@ -62,10 +62,10 @@ class AccountDatabaseTest {
     @Test
     @Throws(Exception::class)
     fun insertAndGetAccount() {
-        val night = AccountData()
-        accountDao.insert(night)
-        val tonight = accountDao.getRecentAccountNumber()
-        assertEquals(tonight?.accountBalance, 0L)
+        val accountData = AccountData()
+        accountDao.insert(accountData)
+        val accountNumber = accountDao.getRecentAccountNumber()
+        assertEquals(accountNumber, Config.INITIAL_ACCOUNT_NUMBER)
     }
 }
 

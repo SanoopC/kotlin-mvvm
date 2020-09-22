@@ -3,6 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="keyboardListener"
+            type="com.exalture.atm.utils.CustomOnEditorActionListener" />
+
+        <variable
+            name="viewModel"
+            type="com.exalture.atm.landing.LandingViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,11 +59,13 @@
                 app:layout_constraintTop_toBottomOf="@id/header">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextEmail"
+                    android:id="@+id/editTextAccountNumber"
                     style="@style/modifiedEditText"
                     android:hint="@string/text_account_number"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1" />
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:text="@={viewModel.accountNumber}"
+                    app:customOnEditorActionListener="@{keyboardListener}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -60,6 +73,7 @@
                 style="@style/gradientButton"
                 android:layout_width="0dp"
                 android:layout_marginTop="@dimen/value_20"
+                android:onClick="@{()-> viewModel.onSubmitButtonClick()}"
                 android:text="@string/submit"
                 android:textAllCaps="true"
                 android:textSize="14sp"

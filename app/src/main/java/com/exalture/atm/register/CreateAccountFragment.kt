@@ -54,7 +54,7 @@ class CreateAccountFragment : Fragment() {
                 viewModel.createAccount()
             }
         })
-        viewModel.navigateToaAccountDetails.observe(viewLifecycleOwner, Observer { accountData ->
+        viewModel.navigateToSuccessDialog.observe(viewLifecycleOwner, Observer { accountData ->
             accountData?.let {
                 openSuccessDialog(accountData)
             }
