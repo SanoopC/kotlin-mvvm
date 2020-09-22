@@ -1,4 +1,4 @@
-package com.exalture.atm
+package com.exalture.atm.utils
 
 import android.graphics.Color
 import android.text.TextUtils
@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
+import com.exalture.atm.Config
+import com.exalture.atm.R
 import com.exalture.atm.database.AccountData
 import com.exalture.atm.register.CreateAccountViewModel
 import com.exalture.atm.statement.MiniStatementFragment
@@ -82,15 +84,13 @@ fun TextView.setTransactionType(item: MiniStatementFragment.Transaction) {
 
 @BindingAdapter("transactionIcon")
 fun ImageView.setTransactionIcon(item: MiniStatementFragment.Transaction) {
-    item.let {
-        setImageResource(
-            when (item.transactionType) {
-                Config.TYPE_DEPOSIT -> R.drawable.ic_deposit
-                Config.TYPE_WITHDRAW -> R.drawable.ic_withdraw
-                else -> R.drawable.ic_transfer
-            }
-        )
-    }
+    setImageResource(
+        when (item.transactionType) {
+            Config.TYPE_DEPOSIT -> R.drawable.ic_deposit
+            Config.TYPE_WITHDRAW -> R.drawable.ic_withdraw
+            else -> R.drawable.ic_transfer
+        }
+    )
 }
 
 @BindingAdapter("nameValidator", "formErrors")
@@ -176,6 +176,18 @@ fun TextView.setAccountNumber(item: AccountData) {
 @BindingAdapter("temporaryPin")
 fun TextView.setTemporaryPin(item: AccountData) {
     item.let {
-        text = item.pin.toString()
+        text = item.pin
+    }
+}
+
+@BindingAdapter("customOnEditorActionListener")
+fun setCustomOnEditorActionListener(view: TextView, listener: CustomOnEditorActionListener?) {
+    if (listener == null) {
+        view.setOnEditorActionListener(null)
+    } else {
+        view.setOnEditorActionListener { _, _, _ ->
+            listener.onEditorAction()
+            false
+        }
     }
 }

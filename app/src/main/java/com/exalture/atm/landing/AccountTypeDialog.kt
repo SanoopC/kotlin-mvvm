@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.exalture.atm.R
+import com.exalture.atm.databinding.DialogAccountTypeBinding
 import kotlinx.android.synthetic.main.dialog_account_type.view.*
 
 class AccountTypeDialog : DialogFragment() {
@@ -21,12 +23,9 @@ class AccountTypeDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.dialog_account_type, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupClickListeners(view)
+        val binding: DialogAccountTypeBinding =
+            DataBindingUtil.inflate(inflater, R.layout.dialog_account_type, container, false)
+        return binding.root
     }
 
     override fun onStart() {

@@ -23,4 +23,7 @@ interface AccountDatabaseDao {
     @Query("SELECT * from account_table WHERE phone_number = :phoneNumber")
     fun checkPhoneInDatabase(phoneNumber: String): List<AccountData>?
 
+    @Query("SELECT * from account_table WHERE accountNumber = :accountNumber")
+    fun checkAccountInDatabase(accountNumber: String): List<AccountData>
+
 }

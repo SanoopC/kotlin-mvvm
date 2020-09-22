@@ -45,13 +45,13 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
     val isRegisteredNumber: LiveData<Boolean>
         get() = _isRegistered
 
-    private var _navigateToaAccountDetails = MutableLiveData<AccountData>()
+    private var _navigateToSuccessDialog = MutableLiveData<AccountData>()
 
-    val navigateToaAccountDetails: LiveData<AccountData>
-        get() = _navigateToaAccountDetails
+    val navigateToSuccessDialog: LiveData<AccountData>
+        get() = _navigateToSuccessDialog
 
     fun doneNavigation() {
-        _navigateToaAccountDetails.value = null
+        _navigateToSuccessDialog.value = null
     }
 
     private var _navigateToaLanding = MutableLiveData<Boolean>()
@@ -134,11 +134,15 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
     fun createAccount() {
         uiScope.launch {
             val newAccount = AccountData(
-                newAccountNumber, randomPin, amount.value?.toDouble(),
-                phoneNumber.value.toString(), fullName.value.toString(), address.value.toString()
+                newAccountNumber,
+                randomPin,
+                amount.value?.toDouble(),
+                phoneNumber.value.toString(),
+                fullName.value.toString(),
+                address.value.toString()
             )
             insert(newAccount)
-            _navigateToaAccountDetails.value = newAccount
+            _navigateToSuccessDialog.value = newAccount
         }
 
     }

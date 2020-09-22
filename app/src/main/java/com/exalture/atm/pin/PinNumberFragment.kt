@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,13 +21,13 @@ import kotlinx.android.synthetic.main.pin_number_fragment.*
 class PinNumberFragment : Fragment() {
 
     private lateinit var viewModel: PinNumberViewModel
-    private lateinit var binding: PinNumberFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.pin_number_fragment, container, false)
+        val binding: PinNumberFragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.pin_number_fragment, container, false)
         viewModel = ViewModelProvider(this).get(PinNumberViewModel::class.java)
         binding.pinViewModel = viewModel
         binding.lifecycleOwner = this
@@ -35,20 +36,16 @@ class PinNumberFragment : Fragment() {
                 editTextPin.inputType = InputType.TYPE_CLASS_NUMBER
                 visibility.text = getString(R.string.text_hide)
                 visibility.setCompoundDrawablesWithIntrinsicBounds(
-                    context?.resources?.getDrawable(
-                        R.drawable.icon_visibility_off,
-                        null
-                    ), null, null, null
+                    ResourcesCompat.getDrawable(resources, R.drawable.icon_visibility_off, null),
+                    null, null, null
                 )
             } else {
                 editTextPin.inputType =
                     InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD
                 visibility.text = getString(R.string.text_show)
                 visibility.setCompoundDrawablesWithIntrinsicBounds(
-                    context?.resources?.getDrawable(
-                        R.drawable.icon_visibility,
-                        null
-                    ), null, null, null
+                    ResourcesCompat.getDrawable(resources, R.drawable.icon_visibility, null),
+                    null, null, null
                 )
             }
         })
@@ -63,11 +60,5 @@ class PinNumberFragment : Fragment() {
         }
         return binding.root
     }
-
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        viewModel = ViewModelProvider(this).get(PinNumberViewModel::class.java)
-//        // TODO: Use the ViewModel
-//    }
 
 }

@@ -1,4 +1,4 @@
-package com.exalture.atm
+package com.exalture.atm.utils
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat

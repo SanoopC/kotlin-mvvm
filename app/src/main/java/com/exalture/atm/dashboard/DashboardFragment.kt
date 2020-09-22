@@ -18,19 +18,13 @@ class DashboardFragment : Fragment() {
     }
 
     private lateinit var viewModel: DashboardViewModel
-    private lateinit var binding: DashboardFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.dashboard_fragment, container, false)
-
-        return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        val binding: DashboardFragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.dashboard_fragment, container, false)
         viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
         binding.dashboardModel = viewModel
         binding.depositButton.setOnClickListener {
@@ -51,7 +45,6 @@ class DashboardFragment : Fragment() {
         binding.othersButton.setOnClickListener {
             findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToPhoneFragment())
         }
-
+        return binding.root
     }
-
 }
