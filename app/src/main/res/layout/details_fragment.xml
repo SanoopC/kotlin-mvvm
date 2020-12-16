@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.exalture.atm.details.DetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_low_bottom">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_photo_image"
+            android:layout_width="0dp"
+            android:layout_height="266dp"
+            android:layout_marginStart="@dimen/value_15"
+            android:layout_marginEnd="@dimen/value_15"
+            app:imageUrl="@{viewModel.selectedProject.detailsImgSrcUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/property_type_text"
+            style="@style/landingHeader"
+            android:layout_width="@dimen/value_0"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@{viewModel.selectedProject.title}"
+            android:textSize="@dimen/text_size_30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_photo_image"
+            tools:text="To Rent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/value_0"
+            android:background="@color/colorWhite"
+            android:padding="16dp"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/property_type_text"
+            tools:context=".DetailFragment">
+
+            <TextView
+                android:id="@+id/price_value_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.selectedProject.description}"
+                android:textColor="#de000000"
+                android:lineSpacingExtra="@dimen/value_5"
+                android:textSize="@dimen/text_size_20"
+                android:justificationMode="inter_word"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="$100,000" />
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

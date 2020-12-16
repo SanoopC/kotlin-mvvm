@@ -18,51 +18,51 @@ class MiniStatementViewModel : ViewModel() {
         _navigateToTransactionDetails.value = null
     }
 
-    private val _transaction = MutableLiveData<List<MiniStatementFragment.Transaction>>(
-        // TODO: Remove dummy values
-        listOf(
-            MiniStatementFragment.Transaction(
-                123400001001,
-                1599563383000,
-                "Deposit",
-                "5,000.00",
-                Config.TYPE_DEPOSIT,
-                0
-            ),
-            MiniStatementFragment.Transaction(
-                123400001002,
-                1599476983000,
-                "Withdraw from ATM",
-                "1,000.00",
-                Config.TYPE_WITHDRAW,
-                0
-            ),
-            MiniStatementFragment.Transaction(
-                123400001003,
-                1599304183000,
-                "Withdraw from ATM",
-                "500.00",
-                Config.TYPE_WITHDRAW,
-                0
-            ),
-            MiniStatementFragment.Transaction(
-                123400001004,
-                1598353783000,
-                "EMI",
-                "1,000.00",
-                Config.TYPE_TRANSFER,
-                9841213132
-            ),
-            MiniStatementFragment.Transaction(
-                123400001005,
-                1596625783000,
-                "Withdraw from ATM",
-                "200.00",
-                Config.TYPE_WITHDRAW,
-                0
+    private val _transaction = MutableLiveData<List<MiniStatementFragment.Transaction>>()
+        .apply {
+            value = listOf(
+                MiniStatementFragment.Transaction(
+                    123400001001,
+                    1599563383000,
+                    "Deposit",
+                    "5,000.00",
+                    Config.TYPE_DEPOSIT,
+                    0
+                ),
+                MiniStatementFragment.Transaction(
+                    123400001002,
+                    1599476983000,
+                    "Withdraw from ATM",
+                    "1,000.00",
+                    Config.TYPE_WITHDRAW,
+                    0
+                ),
+                MiniStatementFragment.Transaction(
+                    123400001003,
+                    1599304183000,
+                    "Withdraw from ATM",
+                    "500.00",
+                    Config.TYPE_WITHDRAW,
+                    0
+                ),
+                MiniStatementFragment.Transaction(
+                    123400001004,
+                    1598353783000,
+                    "EMI",
+                    "1,000.00",
+                    Config.TYPE_TRANSFER,
+                    9841213132
+                ),
+                MiniStatementFragment.Transaction(
+                    123400001005,
+                    1596625783000,
+                    "Withdraw from ATM",
+                    "200.00",
+                    Config.TYPE_WITHDRAW,
+                    0
+                )
             )
-        )
-    )
+        }
     val transaction: LiveData<List<MiniStatementFragment.Transaction>>
         get() = _transaction
 

@@ -30,6 +30,9 @@ class DashboardFragment : Fragment() {
         binding.depositButton.setOnClickListener {
             findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToAmountFragment())
         }
+        binding.withdrawButton.setOnClickListener {
+            findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToPassCodeFragment())
+        }
         binding.statementButton.setOnClickListener {
             findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToMiniStatementFragment())
         }

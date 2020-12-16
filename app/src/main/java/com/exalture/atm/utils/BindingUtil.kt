@@ -3,14 +3,22 @@ package com.exalture.atm.utils
 import android.graphics.Color
 import android.text.TextUtils
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.exalture.atm.Config
 import com.exalture.atm.R
+import com.exalture.atm.about.ApiStatus
+import com.exalture.atm.about.PhotoGridAdapter
 import com.exalture.atm.database.AccountData
+import com.exalture.atm.network.ExaltureProjects
 import com.exalture.atm.register.CreateAccountViewModel
 import com.exalture.atm.statement.MiniStatementFragment
 import com.google.android.material.textfield.TextInputEditText
@@ -188,6 +196,44 @@ fun setCustomOnEditorActionListener(view: TextView, listener: CustomOnEditorActi
         view.setOnEditorActionListener { _, _, _ ->
             listener.onEditorAction()
             false
+        }
+    }
+}
+
+@BindingAdapter("imageUrl")
+fun bindImage(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        val imgUri = imgUrl.toUri().buildUpon().scheme("http").build()
+        Glide.with(imgView.context)
+            .load(imgUri)
+            .apply(
+                RequestOptions()
+//                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
+            )
+            .into(imgView)
+    }
+}
+
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<ExaltureProjects>?) {
+    val adapter = recyclerView.adapter as PhotoGridAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("apiStatus")
+fun bindStatus(statusImageView: ImageView, status: ApiStatus?) {
+    when (status) {
+        ApiStatus.LOADING -> {
+            statusImageView.visibility = VISIBLE
+            statusImageView.setImageResource(R.drawable.loading_animation)
+        }
+        ApiStatus.ERROR -> {
+            statusImageView.visibility = VISIBLE
+            statusImageView.setImageResource(R.drawable.ic_connection_error)
+        }
+        ApiStatus.DONE -> {
+            statusImageView.visibility = GONE
         }
     }
 }

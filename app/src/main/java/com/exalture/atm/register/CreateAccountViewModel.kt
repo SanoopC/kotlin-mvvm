@@ -31,7 +31,8 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
     var phoneNumber = MutableLiveData<String>()
     var amount = MutableLiveData<String>()
 
-    private var _isSavings = MutableLiveData<Boolean>(true)
+    private var _isSavings = MutableLiveData<Boolean>()
+        .apply { value = true }
 
     val isSavingAccount: LiveData<Boolean>
         get() = _isSavings

@@ -29,6 +29,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -108,6 +109,18 @@
                 app:layout_constraintTop_toBottomOf="@id/editTextPin" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancelButton"
+            style="@style/gradientButton"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/value_20"
+            android:onClick="@{()->pinViewModel.backNavigation()}"
+            android:text="@string/text_cancel"
+            android:textAllCaps="true"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"

@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.exalture.atm.R
+import com.exalture.atm.base.BaseAuthFragment
 import com.exalture.atm.databinding.MiniStatementFragmentBinding
 import com.exalture.atm.databinding.TransactionDetailsDialogBinding
 
-class MiniStatementFragment : Fragment() {
+class MiniStatementFragment : BaseAuthFragment() {
     data class Transaction(
         val transactionId: Long,
         val transactionDate: Long,

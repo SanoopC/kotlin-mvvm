@@ -66,4 +66,10 @@
     <string name="text_account_created_successfully">Account Created Successfully</string>
     <string name="error_account_number_invalid">Invalid account number</string>
     <string name="error_not_registered">Account number not registered</string>
+
+    <string name="type_rent">Rent</string>
+    <string name="type_sale">Sale</string>
+    <string name="display_type">For %s</string>
+    <string name="display_price_monthly_rental">$%,.0f/month</string>
+    <string name="display_price">$%,.0f</string>
 </resources>
