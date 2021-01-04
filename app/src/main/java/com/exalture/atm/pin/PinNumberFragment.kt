@@ -17,7 +17,6 @@ import com.exalture.atm.R
 import com.exalture.atm.databinding.PinNumberFragmentBinding
 import com.poovam.pinedittextfield.PinField.OnTextCompleteListener
 import com.poovam.pinedittextfield.SquarePinField
-import kotlinx.android.synthetic.main.pin_number_fragment.*
 
 
 class PinNumberFragment : Fragment() {
@@ -39,17 +38,17 @@ class PinNumberFragment : Fragment() {
         binding.lifecycleOwner = this
         viewModel.isPinVisible.observe(viewLifecycleOwner, Observer {
             if (it == true) {
-                editTextPin.inputType = InputType.TYPE_CLASS_NUMBER
-                visibility.text = getString(R.string.text_hide)
-                visibility.setCompoundDrawablesWithIntrinsicBounds(
+                binding.editTextPin.inputType = InputType.TYPE_CLASS_NUMBER
+                binding.visibility.text = getString(R.string.text_hide)
+                binding.visibility.setCompoundDrawablesWithIntrinsicBounds(
                     ResourcesCompat.getDrawable(resources, R.drawable.icon_visibility_off, null),
                     null, null, null
                 )
             } else {
-                editTextPin.inputType =
+                binding.editTextPin.inputType =
                     InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD
-                visibility.text = getString(R.string.text_show)
-                visibility.setCompoundDrawablesWithIntrinsicBounds(
+                binding.visibility.text = getString(R.string.text_show)
+                binding.visibility.setCompoundDrawablesWithIntrinsicBounds(
                     ResourcesCompat.getDrawable(resources, R.drawable.icon_visibility, null),
                     null, null, null
                 )

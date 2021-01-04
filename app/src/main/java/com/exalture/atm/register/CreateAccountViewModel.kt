@@ -8,11 +8,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.exalture.atm.Config
 import com.exalture.atm.database.AccountData
-import com.exalture.atm.database.AccountDatabaseDao
-import kotlinx.coroutines.*
+import com.exalture.atm.database.ExaltureDatabase
+import com.exalture.atm.repository.AccountRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.util.*
 
-class CreateAccountViewModel(val database: AccountDatabaseDao, application: Application) :
+class CreateAccountViewModel(application: Application) :
     AndroidViewModel(application) {
     private val viewModelJob = Job()
 
@@ -64,6 +68,8 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
         _navigateToaLanding.value = true
     }
 
+    private val accountRepository = AccountRepository(ExaltureDatabase.getInstance(application))
+
     init {
         initializeAccount()
         generateRandomPin()
@@ -71,19 +77,14 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
 
     private fun initializeAccount() {
         uiScope.launch {
-            newAccountNumber = getRecentAccountNumber()?.plus(1) ?: Config.INITIAL_ACCOUNT_NUMBER
+            newAccountNumber =
+                accountRepository.getRecentAccountNumber()?.plus(1) ?: Config.INITIAL_ACCOUNT_NUMBER
         }
     }
 
     @SuppressLint("DefaultLocale")
     private fun generateRandomPin() {
         randomPin = String.format("%04d", Random().nextInt(10000))
-    }
-
-    private suspend fun getRecentAccountNumber(): Long? {
-        return withContext(Dispatchers.IO) {
-            database.getRecentAccountNumber()
-        }
     }
 
     val formErrors = ObservableArrayList<FormErrors>()
@@ -118,17 +119,11 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
 
     private fun checkRegisteredOrNot() {
         uiScope.launch {
-            if (isPhoneRegistered(phoneNumber.value.toString())) {
+            if (accountRepository.isPhoneRegistered(phoneNumber.value.toString())) {
                 _isRegistered.postValue(true)
             } else {
                 _isRegistered.postValue(false)
             }
-        }
-    }
-
-    private suspend fun isPhoneRegistered(phoneNumber: String): Boolean {
-        return withContext(Dispatchers.IO) {
-            database.checkPhoneInDatabase(phoneNumber)?.isNotEmpty() ?: false
         }
     }
 
@@ -142,15 +137,8 @@ class CreateAccountViewModel(val database: AccountDatabaseDao, application: Appl
                 fullName.value.toString(),
                 address.value.toString()
             )
-            insert(newAccount)
+            accountRepository.insertAccount(newAccount)
             _navigateToSuccessDialog.value = newAccount
-        }
-
-    }
-
-    private suspend fun insert(newAccount: AccountData) {
-        withContext(Dispatchers.IO) {
-            database.insert(newAccount)
         }
     }
 

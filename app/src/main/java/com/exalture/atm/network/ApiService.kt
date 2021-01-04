@@ -30,7 +30,7 @@ private val retrofit = Retrofit.Builder()
 interface ApiService {
 
     @GET("7bf58dee-16cf-45a1-9f71-a5a3c55239f3")
-    suspend fun getPortfolio(): List<ExaltureProjects>
+    suspend fun getPortfolio(): List<NetworkExaltureProjects>
 
 }
 

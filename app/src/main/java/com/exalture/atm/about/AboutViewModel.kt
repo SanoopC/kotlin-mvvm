@@ -1,26 +1,20 @@
 package com.exalture.atm.about
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.exalture.atm.network.ExaltureApi
-import com.exalture.atm.network.ExaltureProjects
+import android.app.Application
+import androidx.lifecycle.*
+import com.exalture.atm.database.ExaltureDatabase
+import com.exalture.atm.domain.ExaltureProjects
+import com.exalture.atm.repository.ProjectRepository
 import kotlinx.coroutines.launch
 
 enum class ApiStatus { LOADING, ERROR, DONE }
-class AboutViewModel : ViewModel() {
+class AboutViewModel(application: Application) : AndroidViewModel(application) {
     // The internal MutableLiveData String that stores the most recent response
     private val _status = MutableLiveData<ApiStatus>()
 
     // The external immutable LiveData for the response String
     val status: LiveData<ApiStatus>
         get() = _status
-
-    private val _projects = MutableLiveData<List<ExaltureProjects>>()
-
-    val projects: LiveData<List<ExaltureProjects>>
-        get() = _projects
 
     // Internally, we use a MutableLiveData to handle navigation to the selected property
     private val _navigateToSelectedProject = MutableLiveData<ExaltureProjects>()
@@ -29,26 +23,29 @@ class AboutViewModel : ViewModel() {
     val navigateToSelectedProject: LiveData<ExaltureProjects>
         get() = _navigateToSelectedProject
 
+    private val projectRepository = ProjectRepository(ExaltureDatabase.getInstance(application))
+
     /**
      * Call getPortfolio() on init so we can display immediately.
      */
     init {
-        getPortfolio()
+        refreshDataFromRepository()
     }
+
+    val projects = projectRepository.projects
 
     /**
      * Sets the value of the response LiveData to the Mars API status or the successful number of
      * Mars properties retrieved.
      */
-    private fun getPortfolio() {
+    private fun refreshDataFromRepository() {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             try {
-                _projects.value = ExaltureApi.retrofitService.getPortfolio()
+                projectRepository.refreshProjects()
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
-                _projects.value = ArrayList()
             }
         }
     }
@@ -67,5 +64,19 @@ class AboutViewModel : ViewModel() {
     fun displayPropertyDetailsComplete() {
         _navigateToSelectedProject.value = null
     }
+
+    /**
+     * Factory for constructing AboutViewModel with parameter
+     */
+    class Factory(val app: Application) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(AboutViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return AboutViewModel(app) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
+        }
+    }
+
 }
 

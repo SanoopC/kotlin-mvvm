@@ -19,7 +19,7 @@ package com.exalture.atm.details
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.exalture.atm.network.ExaltureProjects
+import com.exalture.atm.domain.ExaltureProjects
 
 /**
  * Simple ViewModel factory that provides the ExaltureProject and context to the ViewModel.

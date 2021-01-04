@@ -18,7 +18,7 @@ import com.exalture.atm.R
 import com.exalture.atm.about.ApiStatus
 import com.exalture.atm.about.PhotoGridAdapter
 import com.exalture.atm.database.AccountData
-import com.exalture.atm.network.ExaltureProjects
+import com.exalture.atm.domain.ExaltureProjects
 import com.exalture.atm.register.CreateAccountViewModel
 import com.exalture.atm.statement.MiniStatementFragment
 import com.google.android.material.textfield.TextInputEditText
@@ -229,8 +229,7 @@ fun bindStatus(statusImageView: ImageView, status: ApiStatus?) {
             statusImageView.setImageResource(R.drawable.loading_animation)
         }
         ApiStatus.ERROR -> {
-            statusImageView.visibility = VISIBLE
-            statusImageView.setImageResource(R.drawable.ic_connection_error)
+            statusImageView.visibility = GONE
         }
         ApiStatus.DONE -> {
             statusImageView.visibility = GONE

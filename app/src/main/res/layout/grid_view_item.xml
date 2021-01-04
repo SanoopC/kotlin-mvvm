@@ -6,7 +6,7 @@
     <data>
         <variable
             name="property"
-            type="com.exalture.atm.network.ExaltureProjects" />
+            type="com.exalture.atm.domain.ExaltureProjects" />
     </data>
     <ImageView
         android:id="@+id/mars_image"

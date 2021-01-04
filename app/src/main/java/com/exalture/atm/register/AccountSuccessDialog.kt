@@ -9,8 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.exalture.atm.R
 import com.exalture.atm.databinding.AccountSuccessDialogBinding
-import com.exalture.atm.databinding.TransactionDetailsDialogBinding
-import kotlinx.android.synthetic.main.dialog_account_type.view.*
 
 class AccountSuccessDialog : DialogFragment() {
 

@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.exalture.atm.R
-import com.exalture.atm.database.AccountDatabase
+import com.exalture.atm.database.ExaltureDatabase
 import com.exalture.atm.databinding.AccountDetailsFragmentBinding
 
 class AccountDetailsFragment : Fragment() {
@@ -28,7 +28,7 @@ class AccountDetailsFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val arguments = AccountDetailsFragmentArgs.fromBundle(requireArguments())
-        val dataSource = AccountDatabase.getInstance(application).accountDatabaseDao
+        val dataSource = ExaltureDatabase.getInstance(application).accountDatabaseDao
         val viewModelFactory = AccountDetailsViewModelFactory(arguments.accountNumber, dataSource)
         val viewModel =
             ViewModelProvider(this, viewModelFactory).get(AccountDetailsViewModel::class.java)

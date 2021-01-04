@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.exalture.atm.R
 import com.exalture.atm.databinding.TransactionDetailsDialogBinding
-import kotlinx.android.synthetic.main.dialog_account_type.view.*
 
 class TransactionDetailsDialog : DialogFragment() {
 
@@ -25,12 +24,15 @@ class TransactionDetailsDialog : DialogFragment() {
     ): View? {
         val binding: TransactionDetailsDialogBinding =
             DataBindingUtil.inflate(inflater, R.layout.transaction_details_dialog, container, false)
+        binding.cancelButton.setOnClickListener {
+            // TODO: Do some task here
+            dismiss()
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupClickListeners(view)
     }
 
     override fun onStart() {
@@ -41,11 +43,11 @@ class TransactionDetailsDialog : DialogFragment() {
         )
     }
 
-    private fun setupClickListeners(view: View) {
-        view.btnSavings.setOnClickListener {
-            // TODO: Do some task here
-            dismiss()
-        }
-    }
+//    private fun setupClickListeners(view: View) {
+//        view.btnSavings.setOnClickListener {
+//            // TODO: Do some task here
+//            dismiss()
+//        }
+//    }
 
 }

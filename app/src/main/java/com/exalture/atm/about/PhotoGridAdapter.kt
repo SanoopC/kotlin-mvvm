@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.exalture.atm.databinding.GridViewItemBinding
-import com.exalture.atm.network.ExaltureProjects
+import com.exalture.atm.domain.ExaltureProjects
 
 class PhotoGridAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<ExaltureProjects, PhotoGridAdapter.ExaltureProjectViewModel>(DiffCallback) {

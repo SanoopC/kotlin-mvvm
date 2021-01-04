@@ -1,11 +1,9 @@
 package com.exalture.atm.network
 
-import android.os.Parcelable
+import com.exalture.atm.database.DatabaseProjectData
 import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
 
-@Parcelize
-data class ExaltureProjects(
+data class NetworkExaltureProjects(
     val id: String,
     // used to map img_src from the JSON to imgSrcUrl in our class
     @Json(name = "logo_img_src") val logoImgSrcUrl: String,
@@ -13,7 +11,17 @@ data class ExaltureProjects(
     val type: String,
     val title: String,
     val description: String
-) : Parcelable {
-    val isRental: Boolean
-        get() = type == "rent"
+)
+
+fun List<NetworkExaltureProjects>.asDatabaseModel(): List<DatabaseProjectData> {
+    return map {
+        DatabaseProjectData(
+            id = it.id,
+            logoImgSrcUrl = it.logoImgSrcUrl,
+            detailsImgSrcUrl = it.detailsImgSrcUrl,
+            type = it.type,
+            title = it.title,
+            description = it.description
+        )
+    }
 }

@@ -15,7 +15,11 @@ import com.exalture.atm.databinding.AboutFragmentBinding
 class AboutFragment : Fragment() {
 
     private val viewModel: AboutViewModel by lazy {
-        ViewModelProvider(this).get(AboutViewModel::class.java)
+        val activity = requireNotNull(this.activity)
+        ViewModelProvider(
+            this,
+            AboutViewModel.Factory(activity.application)
+        ).get(AboutViewModel::class.java)
     }
 
     override fun onCreateView(

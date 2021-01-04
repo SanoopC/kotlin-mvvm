@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.exalture.atm.R
 import com.exalture.atm.databinding.DialogAccountTypeBinding
-import kotlinx.android.synthetic.main.dialog_account_type.view.*
 
 class AccountTypeDialog : DialogFragment() {
 
@@ -36,15 +35,5 @@ class AccountTypeDialog : DialogFragment() {
         )
     }
 
-    private fun setupClickListeners(view: View) {
-        view.btnSavings.setOnClickListener {
-            // TODO: Do some task here
-            dismiss()
-        }
-        view.btnCurrent.setOnClickListener {
-            // TODO: Do some task here
-            dismiss()
-        }
-    }
 
 }

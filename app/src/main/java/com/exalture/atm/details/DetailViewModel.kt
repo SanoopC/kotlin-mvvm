@@ -2,7 +2,7 @@ package com.exalture.atm.details
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.exalture.atm.network.ExaltureProjects
+import com.exalture.atm.domain.ExaltureProjects
 
 class DetailViewModel(
     exaltureProjects: ExaltureProjects,

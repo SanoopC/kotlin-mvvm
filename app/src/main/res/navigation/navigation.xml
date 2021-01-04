@@ -65,7 +65,7 @@
         tools:layout="@layout/details_fragment">
         <argument
             android:name="selectedItem"
-            app:argType="com.exalture.atm.network.ExaltureProjects" />
+            app:argType="com.exalture.atm.domain.ExaltureProjects" />
     </fragment>
     <navigation
         android:id="@+id/dashboard_navigation"

@@ -12,10 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.exalture.atm.R
 import com.exalture.atm.database.AccountData
-import com.exalture.atm.database.AccountDatabase
 import com.exalture.atm.databinding.AccountSuccessDialogBinding
 import com.exalture.atm.databinding.CreateAccountFragmentBinding
-import kotlinx.android.synthetic.main.create_account_fragment.*
 
 class CreateAccountFragment : Fragment() {
 
@@ -32,17 +30,17 @@ class CreateAccountFragment : Fragment() {
         val binding: CreateAccountFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.create_account_fragment, container, false)
         val application = requireNotNull(this.activity).application
-        val dataSource = AccountDatabase.getInstance(application).accountDatabaseDao
-        val viewModelFactory = CreateAccountViewModelFactory(dataSource, application)
+        val viewModelFactory = CreateAccountViewModelFactory(application)
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(CreateAccountViewModel::class.java)
         binding.createAccountViewModel = viewModel
         binding.lifecycleOwner = this
         viewModel.isSavingAccount.observe(viewLifecycleOwner, Observer { isSavings ->
             if (isSavings) {
-                textInputAmount.hint = getString(R.string.hint_account_opening_amount_optional)
+                binding.textInputAmount.hint =
+                    getString(R.string.hint_account_opening_amount_optional)
             } else {
-                textInputAmount.hint = getString(R.string.hint_account_opening_amount)
+                binding.textInputAmount.hint = getString(R.string.hint_account_opening_amount)
             }
         })
 

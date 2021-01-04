@@ -20,7 +20,7 @@ import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.exalture.atm.database.AccountData
-import com.exalture.atm.database.AccountDatabase
+import com.exalture.atm.database.ExaltureDatabase
 import com.exalture.atm.database.AccountDatabaseDao
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -36,17 +36,17 @@ import java.io.IOException
  */
 
 @RunWith(AndroidJUnit4::class)
-class AccountDatabaseTest {
+class ExaltureDatabaseTest {
 
     private lateinit var accountDao: AccountDatabaseDao
-    private lateinit var db: AccountDatabase
+    private lateinit var db: ExaltureDatabase
 
     @Before
     fun createDb() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         // Using an in-memory database because the information stored here disappears when the
         // process is killed.
-        db = Room.inMemoryDatabaseBuilder(context, AccountDatabase::class.java)
+        db = Room.inMemoryDatabaseBuilder(context, ExaltureDatabase::class.java)
             // Allowing main thread queries, just for testing.
             .allowMainThreadQueries()
             .build()
