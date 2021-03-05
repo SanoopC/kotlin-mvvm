@@ -62,7 +62,7 @@
     <string name="text_temporary_pin">Temporary Pin *</string>
     <string name="text_view_details">View Details</string>
     <string name="text_authenticate">Authenticate</string>
-    <string name="message_temporary_pin">* Please note down the PIN and change as soon as possible after authenticating</string>
+    <string name="message_temporary_pin">Please note down the Account Number &amp; PIN \n* Change the PIN as soon as possible</string>
     <string name="text_account_created_successfully">Account Created Successfully</string>
     <string name="error_account_number_invalid">Invalid account number</string>
     <string name="error_not_registered">Account number not registered</string>

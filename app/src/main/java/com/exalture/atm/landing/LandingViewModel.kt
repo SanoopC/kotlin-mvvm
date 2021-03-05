@@ -1,17 +1,19 @@
 package com.exalture.atm.landing
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.exalture.atm.Config
-import com.exalture.atm.database.AccountDatabaseDao
-import kotlinx.coroutines.*
+import com.exalture.atm.repository.AccountRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LandingViewModel(
-    application: Application,
-    val database: AccountDatabaseDao
-) : AndroidViewModel(application) {
+class LandingViewModel @Inject constructor(
+    val repository: AccountRepository
+) : ViewModel() {
 
     private val viewModelJob = Job()
 
@@ -65,18 +67,12 @@ class LandingViewModel(
 
     private fun checkAccountNumberInDatabase() {
         uiScope.launch {
-            if (isRegisteredAccount(accountNumber.value.toString())) {
+            if (repository.isAccountNumberRegistered(accountNumber.value.toString())) {
                 _navigateToAccountTypeDialog.value = accountNumber.value.toString()
                 _validationStatus.value = null
             } else {
                 _validationStatus.postValue(ValidationStatus.ACCOUNT_NUMBER_NOT_REGISTERED)
             }
-        }
-    }
-
-    private suspend fun isRegisteredAccount(accountNumber: String): Boolean {
-        return withContext(Dispatchers.IO) {
-            database.checkAccountInDatabase(accountNumber).isNotEmpty()
         }
     }
 

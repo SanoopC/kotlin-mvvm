@@ -1,14 +1,19 @@
 package com.exalture.atm.about
 
-import android.app.Application
-import androidx.lifecycle.*
-import com.exalture.atm.database.ExaltureDatabase
+import android.util.Log
+import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.exalture.atm.domain.ExaltureProjects
 import com.exalture.atm.repository.ProjectRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 enum class ApiStatus { LOADING, ERROR, DONE }
-class AboutViewModel(application: Application) : AndroidViewModel(application) {
+class AboutViewModel @Inject constructor(private val projectRepository: ProjectRepository) :
+    ViewModel() {
     // The internal MutableLiveData String that stores the most recent response
     private val _status = MutableLiveData<ApiStatus>()
 
@@ -17,16 +22,16 @@ class AboutViewModel(application: Application) : AndroidViewModel(application) {
         get() = _status
 
     // Internally, we use a MutableLiveData to handle navigation to the selected property
-    private val _navigateToSelectedProject = MutableLiveData<ExaltureProjects>()
+    private val _openSelectedProject = MutableLiveData<String>()
 
     // The external immutable LiveData for the navigation property
-    val navigateToSelectedProject: LiveData<ExaltureProjects>
-        get() = _navigateToSelectedProject
+    val openSelectedProject: LiveData<String>
+        get() = _openSelectedProject
 
-    private val projectRepository = ProjectRepository(ExaltureDatabase.getInstance(application))
+//    var mylist = ObservableArrayList<String>().addAll(listOf("ss","ss"))
 
     /**
-     * Call getPortfolio() on init so we can display immediately.
+     * Call refreshDataFromRepository() on init so we can display immediately.
      */
     init {
         refreshDataFromRepository()
@@ -34,49 +39,32 @@ class AboutViewModel(application: Application) : AndroidViewModel(application) {
 
     val projects = projectRepository.projects
 
-    /**
-     * Sets the value of the response LiveData to the Mars API status or the successful number of
-     * Mars properties retrieved.
-     */
     private fun refreshDataFromRepository() {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             try {
                 projectRepository.refreshProjects()
                 _status.value = ApiStatus.DONE
-            } catch (e: Exception) {
+            } catch (exception: Exception) {
+                Log.e("Exception", exception.toString())
                 _status.value = ApiStatus.ERROR
             }
         }
     }
 
     /**
-     * When the property is clicked, set the [_navigateToSelectedProject] [MutableLiveData]
-     * @param exaltureProjects The [ExaltureProjects] that was clicked on.
+     * When the property is clicked, set the [_openSelectedProject] [MutableLiveData]
+     * @param projectId The [ExaltureProjects] that was clicked on.
      */
-    fun displayPropertyDetails(exaltureProjects: ExaltureProjects) {
-        _navigateToSelectedProject.value = exaltureProjects
+    fun openProjectDetails(projectId: String) {
+        _openSelectedProject.value = projectId
     }
 
     /**
-     * After the navigation has taken place, make sure navigateToSelectedProperty is set to null
+     * After the navigation has taken place, make sure _openSelectedProject is set to null
      */
     fun displayPropertyDetailsComplete() {
-        _navigateToSelectedProject.value = null
+        _openSelectedProject.value = null
     }
-
-    /**
-     * Factory for constructing AboutViewModel with parameter
-     */
-    class Factory(val app: Application) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AboutViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return AboutViewModel(app) as T
-            }
-            throw IllegalArgumentException("Unable to construct viewmodel")
-        }
-    }
-
 }
 

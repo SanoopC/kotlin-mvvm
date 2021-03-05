@@ -10,8 +10,9 @@ import com.exalture.atm.network.ExaltureApi
 import com.exalture.atm.network.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class AccountRepository(private val database: ExaltureDatabase) {
+class AccountRepository @Inject constructor(private val database: ExaltureDatabase) {
     suspend fun insertAccount(newAccount: AccountData) {
         withContext(Dispatchers.IO) {
             database.accountDatabaseDao.insert(newAccount)
@@ -27,6 +28,17 @@ class AccountRepository(private val database: ExaltureDatabase) {
     suspend fun getRecentAccountNumber(): Long? {
         return withContext(Dispatchers.IO) {
             database.accountDatabaseDao.getRecentAccountNumber()
+        }
+    }
+
+    suspend fun isAccountNumberRegistered(accountNumber: String): Boolean {
+        return withContext(Dispatchers.IO) {
+            database.accountDatabaseDao.checkAccountInDatabase(accountNumber).isNotEmpty()
+        }
+    }
+    suspend fun getAccountDetails(accountNumber: String): AccountData? {
+        return withContext(Dispatchers.IO) {
+            database.accountDatabaseDao.get(accountNumber)
         }
     }
 }

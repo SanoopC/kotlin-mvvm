@@ -14,4 +14,7 @@ interface ProjectsDao {
     @Query("SELECT * from project_table")
     fun getProjects(): LiveData<List<DatabaseProjectData>>
 
+    @Query("SELECT * from project_table WHERE id = :projectId")
+    fun getProjectsById(projectId: String): DatabaseProjectData
+
 }

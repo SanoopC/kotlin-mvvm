@@ -44,28 +44,13 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/accountDetailsFragment"
-        android:name="com.exalture.atm.account.AccountDetailsFragment"
-        android:label="AccountDetailsFragment"
-        tools:layout="@layout/account_details_fragment">
-        <argument
-            android:name="accountNumber"
-            app:argType="long" />
-        <action
-            android:id="@+id/action_accountDetailsFragment_to_landingFragment"
-            app:destination="@id/landingFragment"
-            app:launchSingleTop="false"
-            app:popUpTo="@id/landingFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
         android:id="@+id/detailFragment"
         android:name="com.exalture.atm.details.DetailFragment"
         android:label="DetailFragment"
         tools:layout="@layout/details_fragment">
         <argument
             android:name="selectedItem"
-            app:argType="com.exalture.atm.domain.ExaltureProjects" />
+            app:argType="string" />
     </fragment>
     <navigation
         android:id="@+id/dashboard_navigation"
@@ -95,7 +80,32 @@
             <action
                 android:id="@+id/action_dashboardFragment_to_passCodeFragment"
                 app:destination="@id/passCodeFragment" />
+            <action
+                android:id="@+id/action_dashboardFragment_to_accountDetailsFragment"
+                app:destination="@id/accountDetailsFragment" />
         </fragment>
+        <fragment
+            android:id="@+id/accountDetailsFragment"
+            android:name="com.exalture.atm.account.AccountDetailsFragment"
+            android:label="AccountDetailsFragment"
+            tools:layout="@layout/account_details_fragment">
+            <argument
+                android:name="accountNumber"
+                app:argType="string" />
+            <!--            <action-->
+            <!--                android:id="@+id/action_accountDetailsFragment_to_landingFragment"-->
+            <!--                app:destination="@id/landingFragment"-->
+            <!--                app:launchSingleTop="false"-->
+            <!--                app:popUpTo="@id/landingFragment"-->
+            <!--                app:popUpToInclusive="true" />-->
+            <action
+                android:id="@+id/action_accountDetailsFragment_to_dashboardFragment"
+                app:destination="@id/dashboardFragment"
+                app:launchSingleTop="false"
+                app:popUpTo="@id/landingFragment"
+                app:popUpToInclusive="true" />
+        </fragment>
+
         <fragment
             android:id="@+id/passCodeFragment"
             android:name="com.exalture.atm.pin.PinNumberFragment"

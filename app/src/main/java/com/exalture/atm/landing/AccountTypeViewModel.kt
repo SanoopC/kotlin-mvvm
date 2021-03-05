@@ -3,8 +3,9 @@ package com.exalture.atm.landing
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class AccountTypeViewModel : ViewModel() {
+class AccountTypeViewModel @Inject constructor() : ViewModel() {
     private var _isSavingsAccount = MutableLiveData<Boolean?>()
     val isSavingsAccount: LiveData<Boolean?>
         get() = _isSavingsAccount

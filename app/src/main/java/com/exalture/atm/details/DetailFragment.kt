@@ -1,29 +1,47 @@
 package com.exalture.atm.details
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.exalture.atm.R
+import androidx.navigation.fragment.navArgs
+import com.exalture.atm.MyApplication
 import com.exalture.atm.databinding.DetailsFragmentBinding
+import javax.inject.Inject
 
 class DetailFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: DetailViewModel by viewModels {
+        viewModelFactory
+    }
+
+    private val params by navArgs<DetailFragmentArgs>()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.detailsComponent().create()
+            .inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val application = requireNotNull(activity).application
         val binding = DetailsFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = this
-        val marsProperty = DetailFragmentArgs.fromBundle(requireArguments()).selectedItem
-        val viewModelFactory = DetailViewModelFactory(marsProperty, application)
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
         binding.viewModel = viewModel
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.setSelectedProjects(params.selectedItem)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

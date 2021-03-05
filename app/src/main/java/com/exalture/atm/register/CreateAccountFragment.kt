@@ -1,6 +1,7 @@
 package com.exalture.atm.register
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,18 +11,26 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.exalture.atm.MyApplication
 import com.exalture.atm.R
 import com.exalture.atm.database.AccountData
 import com.exalture.atm.databinding.AccountSuccessDialogBinding
 import com.exalture.atm.databinding.CreateAccountFragmentBinding
+import javax.inject.Inject
 
 class CreateAccountFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = CreateAccountFragment()
-    }
+    @Inject
+    lateinit var viewModel: CreateAccountViewModel
 
-    private lateinit var viewModel: CreateAccountViewModel
+    @Inject
+    lateinit var dialogViewModel: AccountSuccessDialogViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.registrationComponent()
+            .create().inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,10 +38,6 @@ class CreateAccountFragment : Fragment() {
     ): View? {
         val binding: CreateAccountFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.create_account_fragment, container, false)
-        val application = requireNotNull(this.activity).application
-        val viewModelFactory = CreateAccountViewModelFactory(application)
-        viewModel =
-            ViewModelProvider(this, viewModelFactory).get(CreateAccountViewModel::class.java)
         binding.createAccountViewModel = viewModel
         binding.lifecycleOwner = this
         viewModel.isSavingAccount.observe(viewLifecycleOwner, Observer { isSavings ->
@@ -74,7 +79,7 @@ class CreateAccountFragment : Fragment() {
                 null,
                 false
             )
-        val dialogViewModel = ViewModelProvider(this).get(AccountSuccessDialogViewModel::class.java)
+
 
         successDialog.setContentView(accountSuccessDialogBinding.root)
         accountSuccessDialogBinding.dialogViewModel = dialogViewModel

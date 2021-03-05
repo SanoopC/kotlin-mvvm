@@ -4,22 +4,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.exalture.atm.database.AccountData
-import com.exalture.atm.database.AccountDatabaseDao
-import kotlinx.coroutines.*
+import com.exalture.atm.repository.AccountRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AccountDetailsViewModel(
-    private val accountNumber: Long,
-    private val database: AccountDatabaseDao
+class AccountDetailsViewModel @Inject constructor(
+    private val repository: AccountRepository
 ) : ViewModel() {
     private val viewModelJob = Job()
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val accountDetails = MutableLiveData<AccountData?>()
+    val accountDetails = MutableLiveData<AccountData?>()
     var mAccountNumber = ""
-    var mHolderName = ""
-    var mCommunicationAddress = ""
-    var mPhoneNumber = ""
+
+
+    fun setAccountNumber(accountNumber: String) {
+        mAccountNumber = accountNumber
+    }
 
     override fun onCleared() {
         super.onCleared()
@@ -40,19 +45,10 @@ class AccountDetailsViewModel(
 
     private fun fetchAccountDetails() {
         uiScope.launch {
-            accountDetails.value = getAccountFromDatabase()
-            mAccountNumber = accountDetails.value?.accountNumber.toString()
-            mHolderName = accountDetails.value?.fullName.toString()
-            mCommunicationAddress = accountDetails.value?.address.toString()
-            mPhoneNumber = accountDetails.value?.phoneNumber.toString()
+            accountDetails.value = repository.getAccountDetails(mAccountNumber)
         }
     }
 
-    private suspend fun getAccountFromDatabase(): AccountData? {
-        return withContext(Dispatchers.IO) {
-            database.get(accountNumber)
-        }
-    }
 
     fun onClose() {
         _navigateToLandingFragment.value = true

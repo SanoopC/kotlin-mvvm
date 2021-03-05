@@ -27,3 +27,16 @@ fun List<DatabaseProjectData>.asDomainModel(): List<ExaltureProjects> {
         )
     }
 }
+
+fun DatabaseProjectData.asDomainModel(): ExaltureProjects {
+    return let {
+        ExaltureProjects(
+            id = it.id,
+            type = it.type,
+            title = it.title,
+            description = it.description,
+            logoImgSrcUrl = it.logoImgSrcUrl,
+            detailsImgSrcUrl = it.detailsImgSrcUrl
+        )
+    }
+}

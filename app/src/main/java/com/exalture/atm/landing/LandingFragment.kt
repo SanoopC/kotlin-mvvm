@@ -1,6 +1,7 @@
 package com.exalture.atm.landing
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -14,21 +15,29 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.exalture.atm.Config
+import com.exalture.atm.MyApplication
 import com.exalture.atm.R
 import com.exalture.atm.SharedPreference
-import com.exalture.atm.database.ExaltureDatabase
 import com.exalture.atm.databinding.DialogAccountTypeBinding
 import com.exalture.atm.databinding.LandingFragmentBinding
 import com.exalture.atm.utils.CustomOnEditorActionListener
+import javax.inject.Inject
 
 
 class LandingFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = LandingFragment()
+    @Inject
+    lateinit var viewModel: LandingViewModel
+
+    @Inject
+    lateinit var dialogViewModel: AccountTypeViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.landingComponent().create()
+            .inject(this)
     }
 
-    private lateinit var viewModel: LandingViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -50,12 +59,8 @@ class LandingFragment : Fragment() {
     ): View? {
         val binding: LandingFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.landing_fragment, container, false)
-        val application = requireNotNull(this.activity).application
-        val dataSource = ExaltureDatabase.getInstance(application).accountDatabaseDao
-        val viewModelFactory = LandingViewModelFactory(dataSource, application)
         val sharedPreference = SharedPreference(context)
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(LandingViewModel::class.java)
         binding.viewModel = viewModel
 
         binding.keyboardListener = object : CustomOnEditorActionListener {
@@ -69,7 +74,8 @@ class LandingFragment : Fragment() {
         viewModel.validationStatus.observe(viewLifecycleOwner, Observer { status ->
             when (status) {
                 LandingViewModel.ValidationStatus.ACCOUNT_NUMBER_MISSING -> {
-                    binding.editTextAccountNumber.error = getString(R.string.error_required_validation)
+                    binding.editTextAccountNumber.error =
+                        getString(R.string.error_required_validation)
                     binding.editTextAccountNumber.requestFocus()
                 }
                 LandingViewModel.ValidationStatus.ACCOUNT_NUMBER_INVALID -> {
@@ -93,6 +99,7 @@ class LandingFragment : Fragment() {
                     openAccountTypeDialog()
                 }
             })
+
         binding.aboutUs.setOnClickListener {
             findNavController().navigate(LandingFragmentDirections.actionLandingFragmentToAboutFragment())
             viewModel.doneNavigation()
@@ -119,13 +126,12 @@ class LandingFragment : Fragment() {
             null,
             false
         )
-        val dialogViewModel = ViewModelProvider(this).get(AccountTypeViewModel::class.java)
 
         dialogAccountType.setContentView(dialogAccountTypeBinding.root)
         dialogAccountTypeBinding.accountTypeViewModel = dialogViewModel
 
         dialogViewModel.isSavingsAccount.observe(viewLifecycleOwner, Observer {
-            //TODO: Need to add logic
+            //TODO: Need to add logic for account type
             if (it != null) {
                 dialogAccountType.dismiss()
                 findNavController().navigate(LandingFragmentDirections.actionLandingFragmentToDashboardFragment())

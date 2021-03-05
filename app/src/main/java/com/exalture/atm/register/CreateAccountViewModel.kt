@@ -1,29 +1,30 @@
 package com.exalture.atm.register
 
 import android.annotation.SuppressLint
-import android.app.Application
 import androidx.databinding.ObservableArrayList
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.exalture.atm.Config
 import com.exalture.atm.database.AccountData
-import com.exalture.atm.database.ExaltureDatabase
 import com.exalture.atm.repository.AccountRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class CreateAccountViewModel(application: Application) :
-    AndroidViewModel(application) {
+class CreateAccountViewModel @Inject constructor() : ViewModel() {
     private val viewModelJob = Job()
 
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
     }
+
+    @Inject
+    lateinit var accountRepository: AccountRepository
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
@@ -67,8 +68,6 @@ class CreateAccountViewModel(application: Application) :
     fun backNavigation() {
         _navigateToaLanding.value = true
     }
-
-    private val accountRepository = AccountRepository(ExaltureDatabase.getInstance(application))
 
     init {
         initializeAccount()

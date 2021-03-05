@@ -15,7 +15,7 @@ interface AccountDatabaseDao {
     fun update(accountData: AccountData)
 
     @Query("SELECT * from account_table WHERE accountNumber = :accountNumber")
-    fun get(accountNumber: Long): AccountData?
+    fun get(accountNumber: String): AccountData?
 
     @Query("SELECT accountNumber from account_table ORDER BY accountNumber DESC LIMIT 1")
     fun getRecentAccountNumber(): Long?

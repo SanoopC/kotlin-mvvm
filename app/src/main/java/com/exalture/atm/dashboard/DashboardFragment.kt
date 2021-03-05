@@ -8,7 +8,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.exalture.atm.Config
 import com.exalture.atm.R
+import com.exalture.atm.SharedPreference
 import com.exalture.atm.databinding.DashboardFragmentBinding
 
 class DashboardFragment : Fragment() {
@@ -27,6 +29,15 @@ class DashboardFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.dashboard_fragment, container, false)
         viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
         binding.dashboardModel = viewModel
+        val sharedPreference = SharedPreference(context)
+        sharedPreference.getAccountNumber(Config.ACCOUNT_NUMBER_KEY)
+        binding.accountDetails.setOnClickListener {
+            findNavController().navigate(
+                DashboardFragmentDirections.actionDashboardFragmentToAccountDetailsFragment(
+                    sharedPreference.getAccountNumber(Config.ACCOUNT_NUMBER_KEY)
+                )
+            )
+        }
         binding.depositButton.setOnClickListener {
             findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToAmountFragment())
         }
